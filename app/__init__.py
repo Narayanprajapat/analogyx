@@ -7,5 +7,5 @@ def create_app():
     CORS(app)
     from app.routes import blueprints
     for route_blueprint in blueprints:
-        app.register_blueprint(route_blueprint, url_prefix='/api/v1')
+        app.register_blueprint(route_blueprint)
     return app

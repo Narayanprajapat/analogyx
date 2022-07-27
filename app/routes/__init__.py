@@ -1,5 +1,5 @@
 from .courses import course
 
-blueprint = [
+blueprints = [
     course
 ]

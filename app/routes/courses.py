@@ -1,5 +1,4 @@
 from flask import Blueprint, request
-
 from app.services.courses import create_course_api
 
 course = Blueprint('course', __name__)

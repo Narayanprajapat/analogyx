@@ -1,6 +1,6 @@
 from app.helper.response_maker import response_maker
 from app.helper import match_value
-from app.models.courses import Course
+from app.models.courses import Courses
 
 
 def create_course_api(request):
@@ -11,8 +11,8 @@ def create_course_api(request):
         return response_maker({"message": "Invalid input"}, 400)
 
     try:
-        print("Create")
-        Course().create({"name": "Narayan"})
+        resp = Courses().create({"name": 1})
+        print(resp)
         return response_maker({"message": "Success"}, 201)
     except Exception as e:
         print(e)

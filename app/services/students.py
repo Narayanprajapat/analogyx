@@ -19,22 +19,6 @@ def create_student_api(request):
         return response_maker({"message": "Internal server error"}, 500)
 
 
-def otp_verify_api(request):
-    try:
-        print(request.form)
-    except Exception as e:
-        print(e)
-        return response_maker({"message": "Invalid input"}, 400)
-
-    try:
-        resp = Students().create({"name": 1})
-        print(resp)
-        return response_maker({"message": "Success"}, 201)
-    except Exception as e:
-        print(e)
-        return response_maker({"message": "Internal server error"}, 500)
-
-
 def show_courses_api(request):
     try:
         print(request.form)

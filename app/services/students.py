@@ -1,6 +1,7 @@
 from app.helper.response_maker import response_maker
 from app.helper import match_value
 from app.models.students import Students
+from app.models.courses import Courses
 from datetime import datetime
 
 
@@ -90,9 +91,9 @@ def show_courses_api(request):
         return response_maker({"message": "Invalid input"}, 400)
 
     try:
-        resp = Students().create({"name": 1})
+        resp = Courses().read({"name": 1},{})
         print(resp)
-        return response_maker({"message": "Success"}, 201)
+        return response_maker({"message": "Success"}, 200)
     except Exception as e:
         print(e)
         return response_maker({"message": "Internal server error"}, 500)

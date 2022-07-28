@@ -22,7 +22,7 @@ def create_course_api(request):
         return response_maker({"message": "Invalid input"}, 400)
 
     try:
-        if not match_value(title, "^[a-zA-Z ]{0,}$"):
+        if not match_value(title, "^[a-zA-Z -]{0,}$"):
             return response_maker({"message": "Invalid title"}, 400)
 
         if not match_value(str(price), "^\\d+$"):

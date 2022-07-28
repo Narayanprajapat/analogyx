@@ -15,7 +15,7 @@ def create_student_api(request):
         expected_graduation = req['expected_graduation']
         address = req['address']
         state = address['state']
-        pincde = address['pincde']
+        pincode = address['pincode']
         district = address['district']
         town = address['town']
     except Exception as e:
@@ -45,7 +45,7 @@ def create_student_api(request):
         if not match_value(state, "^[a-zA-Z ]{0,}$"):
             return response_maker({"message": "Invalid state"}, 400)
 
-        if not match_value(str(pincde), "^\\d+$"):
+        if not match_value(str(pincode), "^\\d+$"):
             return response_maker({"message": "Invalid pincode"}, 400)
 
         if not match_value(district, "^[a-zA-Z ]{0,}$"):
@@ -63,7 +63,7 @@ def create_student_api(request):
             "expected_graduation": expected_graduation,
             "address": {
                 "state": state,
-                "pincde": pincde,
+                "pincode": pincode,
                 "district": district,
                 "town": town
             },

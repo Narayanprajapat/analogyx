@@ -11,7 +11,7 @@ def create_student():
 
 @student.route('/show-courses', methods=['POST'])
 def show_courses():
-    return show_courses_api(request)
+    return show_courses_api()
 
 
 @student.route('/add-courses-enrollment', methods=['POST'])

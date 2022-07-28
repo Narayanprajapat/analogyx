@@ -83,17 +83,20 @@ def create_student_api(request):
         return response_maker({"message": "Internal server error"}, 500)
 
 
-def show_courses_api(request):
+def show_courses_api():
     try:
-        print(request.form)
-    except Exception as e:
-        print(e)
-        return response_maker({"message": "Invalid input"}, 400)
+        query = {"title": 1, "price": 1, "level": 1, "course_type": 1, "instructor_detail.name": 1, "created_at": 1}
+        resp = list(Courses().read({}, query))
 
-    try:
-        resp = Courses().read({"name": 1},{})
-        print(resp)
-        return response_maker({"message": "Success"}, 200)
+        response = list()
+        for i in resp:
+            i['course_id'] = str(i['_id'])
+            i['instructor_name'] = str(i['instructor_detail']['name'])
+            i.pop("_id")
+            i.pop("instructor_detail")
+            response.append(i)
+
+        return response_maker({"message": "Success", "courses": response}, 200)
     except Exception as e:
         print(e)
         return response_maker({"message": "Internal server error"}, 500)

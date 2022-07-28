@@ -1,6 +1,7 @@
 from app.helper.response_maker import response_maker
 from app.helper import match_value
 from app.models.students import Students
+from datetime import datetime
 
 
 def create_student_api(request):
@@ -65,11 +66,17 @@ def create_student_api(request):
                 "pincde": pincde,
                 "district": district,
                 "town": town
-            }
+            },
+            'created_at': datetime.now(),
+            'updated_at': datetime.now(),
         }
-        resp = Students().create(payload)
+        query = {"email": email}
+        resp = Students().read_one(query, {"email": 1})
         print(resp)
-        return response_maker({"message": "Success"}, 201)
+        if resp is None:
+            Students().create(payload)
+            return response_maker({"message": "Success"}, 201)
+        return response_maker({"message": "User already exist"}, 400)
     except Exception as e:
         print(e)
         return response_maker({"message": "Internal server error"}, 500)

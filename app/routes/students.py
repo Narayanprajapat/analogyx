@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.services.students import create_student_api, show_courses_api, add_courses_enrollment_api
+from app.services.students import create_student_api, show_all_courses_api, add_courses_enrollment_api
 
 student = Blueprint('student', __name__)
 
@@ -9,9 +9,9 @@ def create_student():
     return create_student_api(request)
 
 
-@student.route('/show-courses', methods=['POST'])
-def show_courses():
-    return show_courses_api()
+@student.route('/show-all-courses', methods=['POST'])
+def show_all_courses():
+    return show_all_courses_api()
 
 
 @student.route('/add-courses-enrollment', methods=['POST'])

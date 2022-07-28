@@ -86,7 +86,7 @@ def create_student_api(request):
         return response_maker({"message": "Internal server error"}, 500)
 
 
-def show_courses_api():
+def show_all_courses_api():
     try:
         query = {"title": 1, "price": 1, "level": 1, "course_type": 1, "instructor_detail.name": 1, "created_at": 1}
         resp = list(Courses().read({}, query))

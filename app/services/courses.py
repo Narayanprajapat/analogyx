@@ -4,11 +4,11 @@ from app.models.courses import Course
 
 
 def create_course_api(request):
-    # try:
-    #     print(request.form)
-    # except Exception as e:
-    #     print(e)
-    #     return response_maker({"message": "Invalid input"}, 400)
+    try:
+        print(request.form)
+    except Exception as e:
+        print(e)
+        return response_maker({"message": "Invalid input"}, 400)
 
     try:
         print("Create")

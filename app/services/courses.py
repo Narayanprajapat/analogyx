@@ -5,42 +5,53 @@ from app.models.courses import Courses
 
 def create_course_api(request):
     try:
-        print(request.get_json())
-        title = request.form['title']  # Python
-        price = request.form['price']  # 10000
-        level = request.form['level']  # 10000
-        course_type = request.form['course_type']  # live courses, e-book, video
-        instructor_name = request.form['instructor_name']  # XYZ
-        instructor_email = request.form['instructor_email']  # xyz@gmail.com
+        req = request.get_json()
+        title = req['title']  # Python
+        price = req['price']  # 10000
+        level = req['level']  # 10000
+        course_type = req['course_type']  # live courses, e-book, video
 
+        instructor = req['instructor_detail']
+        instructor_name = instructor['name']  # XYZ
+        instructor_email = instructor['email']  # xyz@gmail.com
+
+        module = req['module']
     except Exception as e:
         print(e)
         return response_maker({"message": "Invalid input"}, 400)
 
     try:
+        if not match_value(title, "^[a-zA-Z ]{0,}$"):
+            return response_maker({"message": "Invalid title"}, 400)
+
+        if not match_value(str(price), "^\\d+$"):
+            return response_maker({"message": "Invalid price"}, 400)
+
+        if not match_value(level, "^[a-zA-Z ]{0,}$"):
+            return response_maker({"message": "Invalid level"}, 400)
+
+        if not match_value(course_type, "^[a-zA-Z ]{0,}$"):
+            return response_maker({"message": "Invalid course type"}, 400)
+
+        if not match_value(instructor_name, "^[a-zA-Z ]{0,}$"):
+            return response_maker({"message": "Invalid instructor name"}, 400)
+
+        if not match_value(instructor_email, r"^\S+@\S+\.\S+$"):
+            return response_maker({"message": "Invalid instructor email"}, 400)
+
         payload = {
             "title": title,
             "price": price,
-            "course_type": course_type,
             "level": level,
-            "instructor": {
+            "course_type": course_type,
+            "instructor_detail": {
                 "name": instructor_name,
                 "email": instructor_email
-            }
+            },
+            "module": module
         }
-        name = match_value('Name Narayan', "^[a-zA-Z ]{0,}$")
-        print(name)
-        resp = Courses().create({"name": 1})
-        print(resp)
+        resp = Courses().create(payload)
         return response_maker({"message": "Success"}, 201)
     except Exception as e:
         print(e)
         return response_maker({"message": "Internal server error"}, 500)
-
-
-modules = [
-    {
-        "title": '',
-        "sub_modules": [{"title": "", "duration": "", "video_url": "", "show_preview": True}]
-    }
-]

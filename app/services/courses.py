@@ -50,7 +50,7 @@ def create_course_api(request):
             },
             "module": module
         }
-        resp = Courses().create(payload)
+        Courses().create(payload)
         return response_maker({"message": "Success"}, 201)
     except Exception as e:
         print(e)

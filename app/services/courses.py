@@ -1,6 +1,7 @@
 from app.helper.response_maker import response_maker
 from app.helper import match_value
 from app.models.courses import Courses
+from datetime import datetime
 
 
 def create_course_api(request):
@@ -48,7 +49,9 @@ def create_course_api(request):
                 "name": instructor_name,
                 "email": instructor_email
             },
-            "module": module
+            "module": module,
+            'created_at': datetime.now(),
+            'updated_at': datetime.now(),
         }
         Courses().create(payload)
         return response_maker({"message": "Success"}, 201)

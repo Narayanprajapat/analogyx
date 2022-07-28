@@ -4,3 +4,4 @@ pymongo~=3.12.3
 PyJWT~=2.4.0
 python-dotenv==0.20.0
 Werkzeug~=2.0.2
+regex=2021.4.4

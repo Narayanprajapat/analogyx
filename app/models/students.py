@@ -20,3 +20,8 @@ class Students:
         self._filter = _filter
         self.query = query
         return database.students.find_one(self._filter, self.query)
+
+    def update(self, _filter, data):
+        self._filter = _filter
+        self.data = data
+        return database.students.find_one(self._filter, self.data)

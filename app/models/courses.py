@@ -1,7 +1,7 @@
 from app.models import database
 
 
-class Course:
+class Courses:
     def __init__(self):
         self._filter = None
         self.query = None

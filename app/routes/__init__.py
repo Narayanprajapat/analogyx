@@ -5,5 +5,5 @@ from .students import student
 blueprints = [
     course,
     enrollment,
-student
+    student
 ]
